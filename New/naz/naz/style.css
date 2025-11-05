@@ -1,0 +1,246 @@
+/* Google Font ve Temel Ayarlar */
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #121212; /* Koyu tema arkaplanı */
+    color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; /* Başlangıçta kaydırmayı engelle */
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Geri Sayım Ekranı Stilleri (Sizin Kodunuzdan Alındı) */
+#countdown-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+    animation: fadeIn 2s ease-in-out;
+}
+
+#countdown-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #bb86fc; /* Mor renk */
+}
+
+#countdown {
+    font-size: 2.5rem;
+    display: flex;
+    gap: 15px;
+}
+
+#countdown div {
+    background: #1e1e1e;
+    padding: 15px 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    min-width: 80px;
+}
+
+#countdown div span {
+    display: block;
+    font-size: 1rem;
+    color: #aaa;
+    margin-top: 5px;
+}
+
+/* Başlat Butonu Stili (Sizin Kodunuzdan Alındı) */
+#startButtonScreen {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+#startButton {
+    cursor: pointer;
+    padding: 25px 50px; 
+    background: linear-gradient(135deg, #bb86fc, #9a67ea); 
+    color: #ffffff; 
+    border: none;
+    border-radius: 50px; 
+    font-size: 1.8rem; 
+    font-weight: bold;
+    letter-spacing: 1px; 
+    box-shadow: 0 0 25px rgba(187, 134, 252, 0.7); 
+    transition: all 0.3s ease; 
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3); 
+    position: relative;
+    overflow: hidden; 
+}
+#startButton:hover {
+    transform: translateY(-5px) scale(1.02); 
+    box-shadow: 0 0 35px rgba(187, 134, 252, 0.9); 
+    background: linear-gradient(135deg, #9a67ea, #bb86fc); 
+}
+#startButton:active {
+    transform: translateY(0); 
+    box-shadow: 0 4px 15px rgba(187, 134, 252, 0.5);
+    background: linear-gradient(135deg, #8a57d9, #8a57d9); 
+}
+
+#startButton span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; 
+}
+#startButton span::before { 
+    content: '💖'; 
+    font-size: 1.5em; 
+    animation: pulse 1.5s infinite ease-in-out; 
+}
+
+
+/* Sürpriz İçerik Stilleri (Fotoğraf Galerisi) */
+#birthdayContent {
+    animation: fadeIn 2s ease-out;
+    width: 90%;
+    max-width: 800px;
+}
+
+#birthdayContent h1 {
+    font-size: 3em;
+    color: #bb86fc; /* Mor renk */
+    text-shadow: 0 0 10px #bb86fc;
+    margin-bottom: 10px;
+}
+#birthdayContent p {
+    margin-bottom: 30px;
+}
+
+
+/* Fotoğraf Galerisi (Slider) */
+.slider-container {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    background: #252525;
+    padding: 10px;
+}
+
+.slider-wrapper {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+    object-fit: contain;
+    display: block;
+    border-radius: 10px;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(187, 134, 252, 0.7); /* Yarı saydam mor */
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.slider-btn:hover {
+    background-color: rgba(187, 134, 252, 1);
+}
+
+.prev { left: 15px; }
+.next { right: 15px; }
+
+
+/* Müzik Kontrol Butonları Stili */
+.music-controls {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    
+    opacity: 0;
+    transition: opacity 1s ease-out;
+    pointer-events: none; 
+}
+
+.music-controls.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.music-btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1em;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 30px;
+    background-color: #4CAF50; 
+    color: white;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.music-btn#pauseMusicBtn {
+    background-color: #f44336; /* Durdur için kırmızı */
+}
+
+.music-btn#playMusicBtn {
+    background-color: #4CAF50; /* Oynat için yeşil */
+}
+
+.music-btn:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* Animasyonlar */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Gizli YouTube Oynatıcı */
+#player {
+    position: absolute;
+    left: -9999px;
+}

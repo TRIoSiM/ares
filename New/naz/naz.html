@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doğum Günün Kutlu Olsun!</title>
+    <style>
+        /* Genel Stil ve Dark Tema */
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Kaydırmayı başta engelle */
+        }
+
+        /* Geri Sayım Konteyneri */
+        #countdown-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        #countdown-container h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        #countdown {
+            font-size: 2.5rem;
+            display: flex;
+            gap: 20px;
+        }
+
+        #countdown div {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            min-width: 100px;
+        }
+
+        #countdown div span {
+            display: block;
+            font-size: 1rem;
+            color: #aaa;
+        }
+
+        /* Sürpriz İçerik (Başta Gizli) */
+        #surprise-container {
+            display: none; /* Başlangıçta gizli */
+            height: 100%;
+            overflow-y: auto; /* İçerik taşarsa kaydır */
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        #surprise-container h1 {
+            color: #bb86fc; /* Yumuşak bir mor */
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* Medya Galerisi */
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .gallery img,
+        .gallery video {
+            max-width: 80%;
+            height: auto;
+            border-radius: 15px;
+            border: 3px solid #bb86fc;
+            box-shadow: 0 0 20px rgba(187, 134, 252, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: popIn 0.8s ease-out forwards;
+        }
+
+        /* Animasyonlar */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="countdown-container">
+        <h1>Sürprize Kalan Süre...</h1>
+        <div id="countdown">
+            <div data-unit="days">
+                <span id="days">0</span>
+                <span>Gün</span>
+            </div>
+            <div data-unit="hours">
+                <span id="hours">0</span>
+                <span>Saat</span>
+            </div>
+            <div data-unit="minutes">
+                <span id="minutes">0</span>
+                <span>Dakika</span>
+            </div>
+            <div data-unit="seconds">
+                <span id="seconds">0</span>
+                <span>Saniye</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="surprise-container">
+        <h1>İYİ Kİ DOĞDUN! 🎉🎂</h1>
+        
+        <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80" style="animation-delay: 0.2s;">
+            
+            <p style="font-size: 1.2rem; animation-delay: 0.4s; animation: popIn 0.8s ease-out forwards;">Birlikte nice güzel anılara!</p>
+            
+            <img src="https://images.unsplash.com/photo-1504196600660-0c0485121516?w=800&q=80" style="animation-delay: 0.6s;">
+            
+            <div style="animation-delay: 0.8s; animation: popIn 0.8s ease-out forwards; max-width: 80%; margin: auto; border: 3px solid #bb86fc; border-radius: 15px; overflow: hidden;">
+                 <iframe width="560" height="315" src="https://www.youtube.com/embed/8kPyJG8QZ-E?si=sDq6FvE6d_vX0x6f" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="width: 100%; height: 400px; display: block;"></iframe>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // ===================================================================
+        // DÜZENLE: Doğum günü tarihi ve saati
+        // ===================================================================
+        // Format: Yıl, Ay (0'dan başlar, Ocak=0, Şubat=1...), Gün, Saat, Dakika, Saniye
+        // ÖRNEK: 29 Ekim 2025, sabah 09:00 için: new Date(2025, 9, 29, 9, 0, 0)
+        
+        const birthdayTime = new Date(2025, 9, 29, 0, 0, 0).getTime(); // BURAYI DEĞİŞTİR
+
+        // Geri sayım fonksiyonu
+        const countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = birthdayTime - now;
+
+            // Zaman hesaplamaları
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Değerleri ekrana yaz
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+
+            // Geri sayım bittiğinde
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                
+                // Geri sayımı gizle
+                document.getElementById('countdown-container').style.display = 'none';
+                
+                // Sürprizi göster
+                document.getElementById('surprise-container').style.display = 'block';
+                
+                // Sayfanın kaydırılmasına izin ver
+                document.body.style.overflow = 'auto';
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>

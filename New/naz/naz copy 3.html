@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doğum Günün Kutlu Olsun! 💖</title>
+    <style>
+        /* Genel Stil ve Dark Tema */
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; 
+            transition: background-color 1s;
+        }
+
+        /* Geri Sayım Konteyneri */
+        #countdown-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        #countdown-container h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        #countdown {
+            font-size: 2.5rem;
+            display: flex;
+            gap: 20px;
+        }
+
+        #countdown div {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            min-width: 100px;
+        }
+
+        #countdown div span {
+            display: block;
+            font-size: 1rem;
+            color: #aaa;
+        }
+
+        /* Sürpriz Öncesi Sarıcı (Geri Sayım Bitince Görünen) */
+        #surprise-wrapper {
+            display: none; 
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        /* Başlat Butonu (TATLI TASARIM) */
+        #start-button {
+            cursor: pointer;
+            padding: 25px 50px; 
+            background: linear-gradient(135deg, #bb86fc, #9a67ea); 
+            color: #ffffff; 
+            border: none;
+            border-radius: 50px; 
+            font-size: 1.8rem; 
+            font-weight: bold;
+            letter-spacing: 1px; 
+            box-shadow: 0 8px 25px rgba(187, 134, 252, 0.7); 
+            transition: all 0.3s ease; 
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3); 
+            position: relative;
+            overflow: hidden; 
+        }
+        #start-button:hover {
+            transform: translateY(-5px) scale(1.02); 
+            box-shadow: 0 12px 35px rgba(187, 134, 252, 0.9); 
+            background: linear-gradient(135deg, #9a67ea, #bb86fc); 
+        }
+        #start-button:active {
+            transform: translateY(0); 
+            box-shadow: 0 4px 15px rgba(187, 134, 252, 0.5);
+            background: linear-gradient(135deg, #8a57d9, #8a57d9); 
+        }
+        
+        /* Buton İçindeki İkon ve Yazı için */
+        #start-button span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px; 
+        }
+        #start-button span::before { 
+            content: '💖'; 
+            font-size: 1.5em; 
+            animation: pulse 1.5s infinite ease-in-out; 
+        }
+        
+        /* Galeri ve Başlık Konteyneri (Tıklama Sonrası Görünür) */
+        #surprise-container {
+            display: none; 
+            min-height: 100vh;
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: center;
+            overflow-y: auto; 
+            scroll-behavior: smooth;
+            padding-top: 20px;
+        }
+        
+        #surprise-container h1 {
+            color: #bb86fc;
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 60px; 
+            padding-bottom: 50px;
+        }
+
+        .gallery img,
+        .gallery video {
+            width: 90%; 
+            max-width: 700px;
+            height: auto;
+            border-radius: 15px;
+            border: 3px solid #bb86fc;
+            box-shadow: 0 0 25px rgba(187, 134, 252, 0.5); 
+            opacity: 0;
+            transform: translateY(50px);
+            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+        }
+        
+        .gallery p {
+            border: none;
+            box-shadow: none;
+            font-size: 1.2rem; 
+            text-align: center; 
+            color: #fff;
+            padding: 10px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+        }
+        
+        /* Görünür Olduğunda Animasyon */
+        .gallery img.visible,
+        .gallery video.visible,
+        .gallery p.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Arkaplan Müzik Oynatıcıyı Gizle */
+        #audio-player {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            z-index: -10; 
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+    <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+
+    <div id="countdown-container">
+        <h1>Sürprize Kalan Süre...</h1>
+        <div id="countdown">
+            <div data-unit="days">
+                <span id="days">0</span>
+                <span>Gün</span>
+            </div>
+            <div data-unit="hours">
+                <span id="hours">0</span>
+                <span>Saat</span>
+            </div>
+            <div data-unit="minutes">
+                <span id="minutes">0</span>
+                <span>Dakika</span>
+            </div>
+            <div data-unit="seconds">
+                <span id="seconds">0</span>
+                <span>Saniye</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="surprise-wrapper">
+        <button id="start-button" onclick="startSurprise()">
+            <span>Sürprizi Başlat!</span>
+        </button>
+        
+        <div id="audio-player">
+             <div id="background-audio"></div>
+        </div>
+    </div>
+
+    <div id="surprise-container">
+        <h1>İYİ Kİ DOĞDUN! 🎉🎂</h1>
+        
+        <div class="gallery">
+            
+            <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80">
+            
+            <p>Birlikte nice güzel anılara, dostluğumuz hiç bitmesin!</p>
+            
+            <img src="https://images.unsplash.com/photo-1504196600660-0c0485121516?w=800&q=80">
+            
+            <p>İyi ki seni tanımışım! Her şey gönlünce olsun.</p>
+            
+            <img src="https://images.unsplash.com/photo-1498307833015-e7b400441eb8?w=800&q=80">
+
+        </div>
+    </div>
+
+    <script>
+        // ===================================================================
+        // DÜZENLE: Doğum günü tarihi ve saati
+        // ===================================================================
+        // Format: Yıl, Ay (0'dan başlar, Ocak=0...), Gün, Saat, Dakika, Saniye
+        const birthdayTime = new Date(2025, 9, 29, 9, 0, 0).getTime(); // **** LÜTFEN BURAYI DEĞİŞTİRİN ****
+        
+        let player;
+        
+        // YouTube API hazır olduğunda bu fonksiyon çağrılır
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('background-audio', {
+                videoId: 'AYnojfDGgwI', // Can Bonomo - İyi ki Doğdun
+                playerVars: {
+                    'controls': 0, 
+                    'disablekb': 1,
+                    'loop': 1,
+                    'start': 22, 
+                    'autoplay': 0, 
+                    'mute': 1, 
+                    'playlist': 'AYnojfDGgwI' 
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+        
+        function onPlayerReady(event) {
+            // Oynatıcı hazır ama çalmaya başlamayacak, butona basmayı bekleyecek.
+        }
+
+        // Geri sayım fonksiyonu
+        const countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = birthdayTime - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Değerleri ekrana yaz
+            document.getElementById('days').innerText = days < 0 ? 0 : days;
+            document.getElementById('hours').innerText = hours < 0 ? 0 : hours;
+            document.getElementById('minutes').innerText = minutes < 0 ? 0 : minutes;
+            document.getElementById('seconds').innerText = seconds < 0 ? 0 : seconds;
+
+
+            // Geri sayım bittiğinde
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                
+                // Geri sayımı gizle
+                document.getElementById('countdown-container').style.display = 'none';
+                
+                // Başlatma sarmalayıcısını göster
+                document.getElementById('surprise-wrapper').style.display = 'flex';
+                
+                // API hazırsa, sesi kapalı şekilde çalmaya başla
+                if (player && player.mute) {
+                    player.playVideo(); 
+                }
+                
+                document.body.style.overflow = 'hidden';
+            }
+        }, 1000);
+        
+        // Butona Tıklandığında Çalışacak Fonksiyon
+        function startSurprise() {
+            const surpriseContainer = document.getElementById('surprise-container');
+            
+            // 1. YouTube API ile sesi aç, videoyu oynat ve 22. saniyeye git
+            if (player && player.unMute) {
+                player.unMute(); 
+                player.seekTo(22, true); 
+                player.playVideo(); // Garanti olması için tekrar oynat
+            }
+            
+            // 2. Buton sarıcısını gizle
+            document.getElementById('surprise-wrapper').style.display = 'none';
+
+            // 3. Sürpriz içeriği göster ve kaydırmaya izin ver
+            surpriseContainer.style.display = 'block';
+            document.body.style.overflow = 'auto';
+            
+            // 4. Kaydırmalı animasyonu başlat
+            initScrollAnimations();
+        }
+        
+        // Kaydırma Animasyonlarını Başlatma Fonksiyonu
+        function initScrollAnimations() {
+            const items = document.querySelectorAll('.gallery img, .gallery p');
+
+            const checkVisibility = () => {
+                items.forEach(item => {
+                    const rect = item.getBoundingClientRect();
+                    // Öğenin yarısından fazlası ekrandaysa görünür yap
+                    if (rect.top < window.innerHeight - 100 && rect.bottom > 100) {
+                        item.classList.add('visible');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', checkVisibility);
+            checkVisibility(); 
+        }
+
+    </script>
+
+</body>
+</html>

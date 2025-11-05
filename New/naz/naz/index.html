@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İyi ki Doğdun Naz! 💖</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="countdown-container">
+        <h1>Sürprize Kalan Süre...</h1>
+        <div id="countdown">
+            <div data-unit="days"><span id="days">0</span><span>Gün</span></div>
+            <div data-unit="hours"><span id="hours">0</span><span>Saat</span></div>
+            <div data-unit="minutes"><span id="minutes">0</span><span>Dakika</span></div>
+            <div data-unit="seconds"><span id="seconds">0</span><span>Saniye</span></div>
+        </div>
+    </div>
+
+    <div id="startButtonScreen" class="hidden">
+        <button id="startButton">
+            <span>Sürprizi Başlat!</span>
+        </button>
+    </div>
+
+    <div id="birthdayContent" class="hidden">
+        
+        <h1 id="birthdayTitle">İyi ki Doğdun [İSİM]!</h1>
+        <p>Senin için en güzel anılarımızı topladım...</p>
+
+        <div class="slider-container">
+            <div class="slider-wrapper">
+                <div class="slider-track" id="photo-track">
+                    </div>
+            </div>
+            <button class="slider-btn prev" id="prevBtn">&lt;</button>
+            <button class="slider-btn next" id="nextBtn">&gt;</button>
+        </div>
+        
+        <div class="music-controls">
+            <button id="pauseMusicBtn" class="music-btn">Müziği Durdur</button>
+            <button id="playMusicBtn" class="music-btn hidden">Müziği Oynat</button>
+        </div>
+        
+    </div>
+
+    <div id="player"></div>
+
+    <script src="script.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>
