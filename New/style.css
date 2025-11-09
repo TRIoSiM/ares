@@ -1,0 +1,22 @@
+h1 {
+ background-color: bisque;
+}
+.yazı {
+    position: relative;
+    top: 100px;
+    display: inline;
+    right: 200px;
+    left: 50px;
+    bottom: 20px;
+    font-family: fantasy;
+}
+
+.var {
+    position: absolute;
+    top: 50px;
+    right: 200px;
+}
+
+a{
+    text-decoration: rgb(4, 13, 4) ;
+}
