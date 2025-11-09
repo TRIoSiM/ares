@@ -8,7 +8,13 @@ h1 {
     right: 200px;
     left: 50px;
     bottom: 20px;
-    font-family: fantasy;
+    .delius-regular {
+  font-family: "Delius", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+    
 }
 
 .var {
