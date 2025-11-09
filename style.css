@@ -13,6 +13,7 @@ h1 {
     right: 200px;
     left: 50px;
     bottom: 20px;
+    color: rgb(37, 87, 119);
 }
 
 .var {
@@ -22,6 +23,5 @@ h1 {
 }
 
 a{
-    text-decoration: rgb(4, 13, 4) ;
+    text-decoration: none;
 }
-
