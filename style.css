@@ -1,6 +1,11 @@
 h1 {
  background-color: bisque;
 }
+.delius-regular {
+  font-family: "Delius", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
 .yazı {
     position: relative;
     top: 100px;
@@ -8,7 +13,6 @@ h1 {
     right: 200px;
     left: 50px;
     bottom: 20px;
-    font-family: fantasy;
 }
 
 .var {
@@ -18,5 +22,6 @@ h1 {
 }
 
 a{
-    text-decoration: underline rgb(4, 13, 4) ;
+    text-decoration: rgb(4, 13, 4) ;
 }
+
