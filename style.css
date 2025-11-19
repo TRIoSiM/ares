@@ -13,7 +13,7 @@ h1 {
     right: 200px;
     left: 50px;
     bottom: 20px;
-    color: rgb(37, 87, 119);
+    color: rgb(37, 87, 119) 0.3sc rosybrown 
 }
 
 .var {
@@ -25,3 +25,22 @@ h1 {
 a{
     text-decoration: none;
 }
+ /* 1. Adım: Animasyonun kendisini tanımlayın (@keyframes) */
+@keyframes renkDegisimi {
+  0%   { color: #FF0000; } /* Kırmızı ile başla */
+  25%  { color: #00FF00; } /* Yeşile dön */
+  50%  { color: #0000FF; } /* Maviye dön */
+  75%  { color: #FFFF00; } /* Sarıya dön */
+  100% { color: #6a00ff; } /* Tekrar Kırmızıya dön (döngü için) */
+  75%  {color: #FF0000;}
+  50%  { color: #00FF00; } /* Yeşile dön */
+  25%  { color: #0000FF; } /* Maviye dön */
+  0%  { color: #FFFF00; } /* Sarıya dön */
+}
+
+/* 2. Adım: Animasyonu metne uygulayın */
+.renk-degisken {
+  /* Animasyonun adını, süresini ve döngüsünü belirtin */
+  animation: renkDegisimi 10s linear infinite;
+   
+} 
